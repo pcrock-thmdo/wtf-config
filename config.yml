@@ -1,0 +1,108 @@
+wtf:
+  colors:
+    border:
+      focusable: darkslateblue
+      focused: orange
+      normal: gray
+  refreshInterval: 1
+  mods:
+    clocks:
+      colors:
+        rows:
+          even: "lightblue"
+          odd: "white"
+      enabled: true
+      locations:
+        UTC: "Etc/UTC"
+        Germany: "Europe/Berlin"
+        Oklahoma: "America/Chicago"
+      position:
+        top: 0
+        left: 1
+        height: 1
+        width: 1
+      refreshInterval: 15
+      sort: "chronological"
+      title: "Clocks"
+      type: "clocks"
+    ipinfo:
+      colors:
+        name: "lightblue"
+        value: "white"
+      enabled: true
+      position:
+        top: 0
+        left: 2
+        height: 1
+        width: 1
+      refreshInterval: 150
+    feedreader:
+      enabled: true
+      feeds:
+      - http://feeds.bbci.co.uk/news/rss.xml
+      feedLimit: 10
+      position:
+        top: 1
+        left: 1
+        width: 2
+        height: 1
+      refreshInterval: 14400
+    power:
+      enabled: true
+      position:
+        top: 2
+        left: 1
+        height: 1
+        width: 1
+      refreshInterval: 15
+      title: "⚡️"
+    cmdrunner:
+      title: "Sentry"
+      cmd: "wtf-modules/wtf-sentry.sh"
+      enabled: true
+      position:
+        top: 0
+        left: 0
+        height: 4
+        width: 1
+      refreshInterval: 5m
+    jira:
+      # apiKey: "Use WTF_JIRA_API_KEY env variable instead"
+      domain: "https://thermondo.atlassian.net"
+      email: "philip.crockett@thermondo.de"
+      enabled: true
+      jql: "project = BAM AND status != Done AND assignee in (currentUser()) order by created DESC"
+      position:
+        top: 3
+        left: 1
+        height: 1
+        width: 1
+      refreshInterval: 15m
+      verifyServerCertificate: true
+    github:
+      # apiKey: "Use WTF_GITHUB_TOKEN env variable instead"
+      title: "GitHub"
+      showMyPullRequests: false
+      showOpenReviewRequests: false
+      showStats: false
+      customQueries:
+        myPRs:
+          title: "Authored PRs"
+          filter: "is:open is:pr author:pcrockett archived:false user:thermondo"
+        assignedPRs:
+          title: "Assigned PRs"
+          filter: "is:open is:pr archived:false user:thermondo assignee:pcrockett"
+        reviewRequests:
+          title: "Review Requests"
+          filter: "is:open is:pr archived:false user:thermondo review-requested:pcrockett"
+      enabled: true
+      enableStatus: true
+      repositories:
+        - "pcrockett/phil-therm"
+      position:
+        top: 2
+        left: 2
+        height: 2
+        width: 1
+      refreshInterval: 5m
+      username: "pcrockett"
