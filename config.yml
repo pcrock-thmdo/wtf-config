@@ -71,7 +71,7 @@ wtf:
       domain: "https://thermondo.atlassian.net"
       email: "philip.crockett@thermondo.de"
       enabled: true
-      jql: "project = BAM AND status != Done AND assignee in (currentUser()) order by created DESC"
+      jql: "project = HERO AND status != Done AND assignee in (currentUser()) order by created DESC"
       position:
         top: 3
         left: 1
@@ -98,7 +98,7 @@ wtf:
       enabled: true
       enableStatus: true
       repositories:
-        - "pcrockett/phil-therm"
+        - "pcrockett/wtf-config"  # Hopefully not needed after https://github.com/wtfutil/wtf/issues/1312
       position:
         top: 2
         left: 2
