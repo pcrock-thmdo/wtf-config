@@ -58,7 +58,7 @@ wtf:
       title: "⚡️"
     cmdrunner:
       title: "Sentry"
-      cmd: "wtf-modules/wtf-sentry.sh"
+      cmd: "modules/wtf-sentry.sh"
       enabled: true
       position:
         top: 0
