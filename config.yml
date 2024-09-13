@@ -36,22 +36,11 @@ wtf:
         height: 1
         width: 1
       refreshInterval: 150
-    feedreader:
-      enabled: true
-      feeds:
-      - http://feeds.bbci.co.uk/news/rss.xml
-      feedLimit: 10
-      position:
-        top: 1
-        left: 1
-        width: 2
-        height: 1
-      refreshInterval: 14400
     power:
       enabled: true
       position:
-        top: 2
-        left: 1
+        top: 0
+        left: 0
         height: 1
         width: 1
       refreshInterval: 15
@@ -61,9 +50,9 @@ wtf:
       cmd: "modules/sentry.sh"
       enabled: true
       position:
-        top: 0
+        top: 1
         left: 0
-        height: 4
+        height: 3
         width: 1
       refreshInterval: 5m
     jira:
@@ -71,11 +60,11 @@ wtf:
       domain: "https://thermondo.atlassian.net"
       email: "philip.crockett@thermondo.de"
       enabled: true
-      jql: "project = HERO AND status != Done AND assignee in (currentUser()) order by created DESC"
+      jql: "project = TD AND assignee in (currentUser()) AND status = 'In Progress' ORDER BY updated DESC"
       position:
-        top: 3
+        top: 1
         left: 1
-        height: 1
+        height: 3
         width: 1
       refreshInterval: 15m
       verifyServerCertificate: true
@@ -88,21 +77,21 @@ wtf:
       customQueries:
         myPRs:
           title: "Authored PRs"
-          filter: "is:open is:pr author:pcrockett archived:false user:thermondo"
+          filter: "is:open is:pr author:pcrock-thmdo archived:false user:thermondo"
         assignedPRs:
           title: "Assigned PRs"
-          filter: "is:open is:pr archived:false user:thermondo assignee:pcrockett"
+          filter: "is:open is:pr archived:false user:thermondo assignee:pcrock-thmdo"
         reviewRequests:
           title: "Review Requests"
-          filter: "is:open is:pr archived:false user:thermondo review-requested:pcrockett"
+          filter: "is:open is:pr archived:false user:thermondo review-requested:pcrock-thmdo"
       enabled: true
       enableStatus: true
       repositories:
-        - "pcrockett/wtf-config"  # Hopefully not needed after https://github.com/wtfutil/wtf/issues/1312
+        - "pcrock-thmdo/wtf-config"  # Hopefully not needed after https://github.com/wtfutil/wtf/issues/1312
       position:
-        top: 2
+        top: 1
         left: 2
-        height: 2
+        height: 3
         width: 1
       refreshInterval: 5m
       username: "pcrockett"
