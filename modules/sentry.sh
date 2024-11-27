@@ -25,5 +25,5 @@ readonly SENTRY_API_KEY
 
 curl "https://sentry.io/api/0/organizations/${ORG}/issues/?statsPeriod=${STATS_PERIOD}&query=${QUERY}&environment=prod&environment=production" \
     -H "Authorization: Bearer ${SENTRY_API_KEY}" \
-    | jq --raw-output ".[] | [.count, .userCount, (.lastSeen | .[0:10]), .title] | join(\" \")" \
+    | jq --raw-output ".[] | [.count, .userCount, .lastSeen, .title] | join(\" \")" \
     | column --table --table-columns "EVENTS,USERS,LAST SEEN,TITLE" --table-columns-limit 4
