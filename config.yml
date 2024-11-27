@@ -45,16 +45,6 @@ wtf:
         width: 1
       refreshInterval: 15
       title: "⚡️"
-    cmdrunner:
-      title: "Sentry"
-      cmd: "modules/sentry.sh"
-      enabled: true
-      position:
-        top: 1
-        left: 0
-        height: 3
-        width: 1
-      refreshInterval: 5m
     jira:
       # apiKey: "Use WTF_JIRA_API_KEY env variable instead"
       domain: "https://thermondo.atlassian.net"
@@ -63,11 +53,21 @@ wtf:
       jql: "project = TD AND assignee in (currentUser()) AND status = 'In Progress' ORDER BY updated DESC"
       position:
         top: 1
-        left: 1
-        height: 3
-        width: 1
+        left: 0
+        height: 1
+        width: 2
       refreshInterval: 15m
       verifyServerCertificate: true
+    cmdrunner:
+      title: "Sentry"
+      cmd: "modules/sentry.sh"
+      enabled: true
+      position:
+        top: 2
+        left: 0
+        height: 2
+        width: 2
+      refreshInterval: 5m
     github:
       # apiKey: "Use WTF_GITHUB_TOKEN env variable instead"
       title: "GitHub"
