@@ -58,40 +58,52 @@ wtf:
         width: 2
       refreshInterval: 15m
       verifyServerCertificate: true
-    cmdrunner:
-      title: "Sentry"
-      cmd: "modules/sentry.sh"
+    sentry_platform:
+      type: cmdrunner
+      title: "Sentry (Platform)"
+      cmd: "modules/sentry-assigned.sh"
       enabled: true
       position:
         top: 2
         left: 0
-        height: 2
+        height: 1
         width: 2
       refreshInterval: 5m
-    github:
-      # apiKey: "Use WTF_GITHUB_TOKEN env variable instead"
-      title: "GitHub"
-      showMyPullRequests: false
-      showOpenReviewRequests: false
-      showStats: false
-      customQueries:
-        myPRs:
-          title: "Authored PRs"
-          filter: "is:open is:pr author:pcrock-thmdo archived:false user:thermondo"
-        assignedPRs:
-          title: "Assigned PRs"
-          filter: "is:open is:pr archived:false user:thermondo assignee:pcrock-thmdo"
-        reviewRequests:
-          title: "Review Requests"
-          filter: "is:open is:pr archived:false user:thermondo review-requested:pcrock-thmdo"
+    sentry_unassigned:
+      type: cmdrunner
+      title: "Sentry (Unassigned)"
+      cmd: "modules/sentry-unassigned.sh"
       enabled: true
-      enableStatus: true
-      repositories:
-        - "pcrock-thmdo/wtf-config"  # Hopefully not needed after https://github.com/wtfutil/wtf/issues/1312
       position:
-        top: 1
-        left: 2
-        height: 3
-        width: 1
+        top: 3
+        left: 0
+        height: 1
+        width: 2
       refreshInterval: 5m
-      username: "pcrockett"
+    # github:
+    #   # apiKey: "Use WTF_GITHUB_TOKEN env variable instead"
+    #   title: "GitHub"
+    #   showMyPullRequests: false
+    #   showOpenReviewRequests: false
+    #   showStats: false
+    #   customQueries:
+    #     myPRs:
+    #       title: "Authored PRs"
+    #       filter: "is:open is:pr author:pcrock-thmdo archived:false user:thermondo"
+    #     assignedPRs:
+    #       title: "Assigned PRs"
+    #       filter: "is:open is:pr archived:false user:thermondo assignee:pcrock-thmdo"
+    #     reviewRequests:
+    #       title: "Review Requests"
+    #       filter: "is:open is:pr archived:false user:thermondo review-requested:pcrock-thmdo"
+    #   enabled: true
+    #   enableStatus: true
+    #   repositories:
+    #     - "pcrock-thmdo/wtf-config"  # Hopefully not needed after https://github.com/wtfutil/wtf/issues/1312
+    #   position:
+    #     top: 1
+    #     left: 2
+    #     height: 3
+    #     width: 1
+    #   refreshInterval: 5m
+    #   username: "pcrockett"

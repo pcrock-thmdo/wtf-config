@@ -9,7 +9,7 @@ readonly STATS_PERIOD="30d"
 #
 # ```python
 # from urllib.parse import urlencode
-# urlencode("is:unresolved assigned_or_suggested:[me, my_teams]")
+# urlencode({"query": "is:unresolved assigned_or_suggested:[me, my_teams]"})
 # ```
 #
 readonly QUERY="is%3Aunresolved+assigned_or_suggested%3A%5Bme%2C+my_teams%5D"
@@ -25,5 +25,5 @@ readonly SENTRY_API_KEY
 
 curl "https://sentry.io/api/0/organizations/${ORG}/issues/?statsPeriod=${STATS_PERIOD}&query=${QUERY}&environment=prod&environment=production" \
     -H "Authorization: Bearer ${SENTRY_API_KEY}" \
-    | jq --raw-output ".[] | [.count, .userCount, .lastSeen, .title] | join(\" \")" \
-    | column --table --table-columns "EVENTS,USERS,LAST SEEN,TITLE" --table-columns-limit 4
+    | jq --raw-output ".[] | [.project.name, .count, .userCount, .lastSeen, .title] | join(\" \")" \
+    | column --table --table-columns "PROJECT,EVENTS,USERS,LAST SEEN,TITLE" --table-columns-limit 5
