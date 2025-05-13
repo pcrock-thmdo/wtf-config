@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
 
-readonly THIS_DIR="$(dirname "$(readlink -f "${0}")")"
+THIS_DIR="$(dirname "$(readlink -f "${0}")")"
+readonly THIS_DIR
 readonly BASE_KEY_ID="com.philcrockett.wtfutil"
 readonly JIRA_KEY_ID="${BASE_KEY_ID}.jira"
-readonly GITHUB_KEY_ID="${BASE_KEY_ID}.github"
 readonly SENTRY_KEY_ID="${BASE_KEY_ID}.sentry"
 
 secret_lookup() {
@@ -26,16 +26,11 @@ fi
 
 export WTF_JIRA_API_KEY
 
-if ! WTF_GITHUB_TOKEN="$(secret_lookup "${GITHUB_KEY_ID}")"; then
+if ! WTF_GITHUB_TOKEN="$(gh auth token)"; then
     echo "
-Please generate a GitHub personal access token here:
-
-    https://github.com/settings/tokens
-
-It needs the \"repo\" scope. Paste it here:
+Unable to get token from \`gh\`. Make sure you're authenticated with the GitHub CLI.
 "
-    secret-tool store --label "GitHub Personal Access Token" xdg:schema "${GITHUB_KEY_ID}"
-    WTF_GITHUB_TOKEN="$(secret_lookup "${GITHUB_KEY_ID}")"
+    exit 1
 fi
 
 export WTF_GITHUB_TOKEN
