@@ -3,11 +3,19 @@ const SENTRY_KEY_ID = "com.philcrockett.wtfutil.sentry"
 const SENTRY_BASE_URL = $"https://sentry.io/api/0"
 
 export def get [$endpoint: string] {
-  sentry-api-call get $endpoint 
+  sentry-api-call get $endpoint
 }
 
 export def put [$endpoint: string] {
-  $in | sentry-api-call get $endpoint 
+  $in | sentry-api-call put $endpoint
+}
+
+# assign one or more issues to a team
+export def "assign team" [$team_id: int] {
+  $in | each {|issue_id|
+    print $"assigning issue ($issue_id) to team ($team_id)..."
+    { assignedTo: $"team:($team_id)" } | put $"organizations/thermondo/issues/($issue_id)/"
+  }
 }
 
 def get-sentry-key [] {
