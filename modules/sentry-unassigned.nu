@@ -2,7 +2,7 @@
 
 use ./util/sentry.nu
 const STATS_PERIOD = "30d"
-const QUERY = "is%3Aunresolved+is%3Aunassigned"
+const QUERY = "is:unresolved is:unassigned"
 
 def main [] {
   (

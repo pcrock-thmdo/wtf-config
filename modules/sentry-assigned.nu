@@ -2,7 +2,7 @@
 
 use ./util/sentry.nu
 const STATS_PERIOD = "30d"
-const QUERY = "is%3Aunresolved+assigned_or_suggested%3A%5Bme%2C+my_teams%5D"
+const QUERY = "is:unresolved assigned_or_suggested:[me,+my_teams]"
 
 def main [] {
   (
