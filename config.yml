@@ -61,7 +61,7 @@ wtf:
     sentry_platform:
       type: cmdrunner
       title: "Sentry (Platform)"
-      cmd: "modules/sentry-assigned.sh"
+      cmd: "modules/sentry-assigned.nu"
       enabled: true
       position:
         top: 2
@@ -72,7 +72,7 @@ wtf:
     sentry_unassigned:
       type: cmdrunner
       title: "Sentry (Unassigned)"
-      cmd: "modules/sentry-unassigned.sh"
+      cmd: "modules/sentry-unassigned.nu"
       enabled: true
       position:
         top: 3
