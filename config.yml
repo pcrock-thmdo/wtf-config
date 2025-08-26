@@ -106,7 +106,7 @@ wtf:
     github_alerts:
       type: cmdrunner
       title: GitHub Alerts
-      cmd: "modules/github-alerts.sh"
+      cmd: "modules/github-alerts.nu"
       enabled: true
       position:
         top: 2
