@@ -78,6 +78,19 @@ wtf:
         width: 2
       refreshInterval: 15m
       verifyServerCertificate: true
+    github_notifications:
+      type: cmdrunner
+      title: GitHub Notifications
+      cmd: "modules/github-notifications.sh"
+      enabled: true
+      position:
+        top: 1
+        left: 2
+        height: 1
+        width: 2
+      refreshInterval: 5m
+
+## THIRD ROW ##
     sentry_platform:
       type: cmdrunner
       title: "Sentry (Platform)"
@@ -89,6 +102,20 @@ wtf:
         height: 1
         width: 2
       refreshInterval: 5m
+
+    github_alerts:
+      type: cmdrunner
+      title: GitHub Alerts
+      cmd: "modules/github-alerts.sh"
+      enabled: true
+      position:
+        top: 2
+        left: 2
+        height: 1
+        width: 2
+      refreshInterval: 15m
+
+## FOURTH ROW ##
     sentry_unassigned:
       type: cmdrunner
       title: "Sentry (Unassigned)"
