@@ -78,21 +78,6 @@ wtf:
         width: 2
       refreshInterval: 15m
       verifyServerCertificate: true
-    jira_acs:
-      # apiKey: "Use WTF_JIRA_API_KEY env variable instead"
-      type: jira
-      title: JIRA (ACS)
-      domain: "https://thermondo.atlassian.net"
-      email: "philip.crockett@thermondo.de"
-      enabled: true
-      jql: "project = ACS AND assignee in (currentUser()) AND status in ('In Progress', 'In QA') ORDER BY updated DESC"
-      position:
-        top: 1
-        left: 2
-        height: 1
-        width: 2
-      refreshInterval: 15m
-      verifyServerCertificate: true
     sentry_platform:
       type: cmdrunner
       title: "Sentry (Platform)"
