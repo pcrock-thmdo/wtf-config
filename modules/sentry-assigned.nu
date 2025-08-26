@@ -1,6 +1,7 @@
 #!/usr/bin/env nu
 
 use ./util/sentry.nu
+use ./util/wtf-table.nu
 const STATS_PERIOD = "30d"
 const QUERY = "is:unresolved assigned_or_suggested:[me,+my_teams]"
 
@@ -16,6 +17,6 @@ def main [] {
         title: $in.title
       }
     }
-    | table --index false --theme none
+    | wtf-table
   )
 }
