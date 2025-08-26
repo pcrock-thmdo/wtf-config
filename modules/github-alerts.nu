@@ -14,7 +14,7 @@ def main [] {
       repo: $in.repository.nameWithOwner
       package: $in.securityVulnerability.package.name
       severity: $in.securityVulnerability.severity
-      link: $in.securityAdvisory.permalink
+      summary: $in.securityAdvisory.summary
     }
   }
   | wtf-table
