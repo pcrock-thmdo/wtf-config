@@ -6,7 +6,7 @@ const QUERY = "is:unresolved assigned_or_suggested:[me,+my_teams]"
 
 def main [] {
   (
-    sentry get $"organizations/($ORG)/issues/?statsPeriod=($STATS_PERIOD)&query=($QUERY)&environment=prod&environment=production"
+    sentry get $"organizations/($sentry.ORG)/issues/?statsPeriod=($STATS_PERIOD)&query=($QUERY)&environment=prod&environment=production"
     | each {
       {
         project: $in.project.name

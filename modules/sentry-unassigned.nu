@@ -6,7 +6,7 @@ const QUERY = "is:unresolved is:unassigned"
 
 def main [] {
   (
-    sentry get $"organizations/($ORG)/issues/?statsPeriod=($STATS_PERIOD)&query=($QUERY)&environment=prod&environment=production"
+    sentry get $"organizations/($sentry.ORG)/issues/?statsPeriod=($STATS_PERIOD)&query=($QUERY)&environment=prod&environment=production"
     | each {
       {
         project: $in.project.name
