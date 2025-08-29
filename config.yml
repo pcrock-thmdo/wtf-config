@@ -53,7 +53,6 @@ wtf:
       title: Heroku Status
       cmd: "heroku"
       args: ["status"]
-      pty: true
       enabled: true
       position:
         top: 0
@@ -124,6 +123,18 @@ wtf:
       position:
         top: 3
         left: 0
+        height: 1
+        width: 2
+      refreshInterval: 5m
+
+    sentry_org_sched:
+      type: cmdrunner
+      title: "Sentry (Org&Sched)"
+      cmd: "modules/sentry-org-sched.nu"
+      enabled: true
+      position:
+        top: 3
+        left: 2
         height: 1
         width: 2
       refreshInterval: 5m
