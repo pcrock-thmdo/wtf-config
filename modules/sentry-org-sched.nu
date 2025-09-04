@@ -3,11 +3,19 @@
 use ./util/sentry.nu
 use ./util/wtf-table.nu
 const STATS_PERIOD = "7d"
-const QUERY = $"is%3Aunresolved%20assigned_or_suggested%3A%23organize-and-schedule"
 
 def main [] {
+  let query_str = (
+    {
+      query: "is:unresolved assigned_or_suggested:#organize-and-schedule"
+      statsPeriod: "7d"
+      environment: [prod production]
+      sort: date
+    } | url build-query
+  )
+
   (
-    sentry get $"organizations/($sentry.ORG)/issues/?statsPeriod=($STATS_PERIOD)&query=($QUERY)&environment=prod&environment=production&sort=date&statsPeriod=7d"
+    sentry get $"organizations/($sentry.ORG)/issues/?($query_str)"
     | each {
       {
         project: $in.project.name
