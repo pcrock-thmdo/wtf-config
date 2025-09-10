@@ -12,41 +12,54 @@ secret_lookup() {
     secret-tool lookup xdg:schema "${key_id}"
 }
 
-if ! WTF_JIRA_API_KEY="$(secret_lookup "${JIRA_KEY_ID}")"; then
-    echo "
+setup:jira() {
+    if ! WTF_JIRA_API_KEY="$(secret_lookup "${JIRA_KEY_ID}")"; then
+        echo "
 Please generate a Jira API token here:
 
     https://id.atlassian.com/manage-profile/security/api-tokens
 
 and then paste it here:
-"
-    secret-tool store --label "Jira API Key" xdg:schema "${JIRA_KEY_ID}"
-    WTF_JIRA_API_KEY="$(secret_lookup "${JIRA_KEY_ID}")"
-fi
+    "
+        secret-tool store --label "Jira API Key" xdg:schema "${JIRA_KEY_ID}"
+        WTF_JIRA_API_KEY="$(secret_lookup "${JIRA_KEY_ID}")"
+    fi
 
-export WTF_JIRA_API_KEY
+    export WTF_JIRA_API_KEY
+}
 
-if ! WTF_GITHUB_TOKEN="$(gh auth token)"; then
-    echo "
+setup:github() {
+    if ! WTF_GITHUB_TOKEN="$(gh auth token)"; then
+        echo "
 Unable to get token from \`gh\`. Make sure you're authenticated with the GitHub CLI.
-"
-    exit 1
-fi
+    "
+        exit 1
+    fi
 
-export WTF_GITHUB_TOKEN
+    export WTF_GITHUB_TOKEN
+}
 
-if ! WTF_SENTRY_TOKEN="$(secret_lookup "${SENTRY_KEY_ID}")"; then
-    echo "
+setup:sentry() {
+    if ! WTF_SENTRY_TOKEN="$(secret_lookup "${SENTRY_KEY_ID}")"; then
+        echo "
 Please generate a Sentry auth token here:
 
     https://sentry.io/settings/account/api/auth-tokens/new-token/
 
 It needs read-only permissions. Paste it here:
-"
-    secret-tool store --label "Sentry Auth Token" xdg:schema "${SENTRY_KEY_ID}"
-    WTF_SENTRY_TOKEN="$(secret_lookup "${SENTRY_KEY_ID}")"
-fi
+    "
+        secret-tool store --label "Sentry Auth Token" xdg:schema "${SENTRY_KEY_ID}"
+        WTF_SENTRY_TOKEN="$(secret_lookup "${SENTRY_KEY_ID}")"
+    fi
 
-export WTF_SENTRY_TOKEN
+    export WTF_SENTRY_TOKEN
+}
 
-wtfutil --config="${THIS_DIR}/config.yml"
+main() {
+    setup:jira
+    setup:github
+    setup:sentry
+    wtfutil --config="${THIS_DIR}/config.yml"
+}
+
+main
