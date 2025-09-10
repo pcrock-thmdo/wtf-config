@@ -6,6 +6,7 @@ readonly THIS_DIR
 readonly BASE_KEY_ID="com.philcrockett.wtfutil"
 readonly JIRA_KEY_ID="${BASE_KEY_ID}.jira"
 readonly SENTRY_KEY_ID="${BASE_KEY_ID}.sentry"
+readonly FRESHDESK_KEY_ID="${BASE_KEY_ID}.freshdesk"
 
 secret_lookup() {
     local key_id="${1}"
@@ -20,7 +21,7 @@ Please generate a Jira API token here:
     https://id.atlassian.com/manage-profile/security/api-tokens
 
 and then paste it here:
-    "
+"
         secret-tool store --label "Jira API Key" xdg:schema "${JIRA_KEY_ID}"
         WTF_JIRA_API_KEY="$(secret_lookup "${JIRA_KEY_ID}")"
     fi
@@ -32,7 +33,7 @@ setup:github() {
     if ! WTF_GITHUB_TOKEN="$(gh auth token)"; then
         echo "
 Unable to get token from \`gh\`. Make sure you're authenticated with the GitHub CLI.
-    "
+"
         exit 1
     fi
 
@@ -47,7 +48,7 @@ Please generate a Sentry auth token here:
     https://sentry.io/settings/account/api/auth-tokens/new-token/
 
 It needs read-only permissions. Paste it here:
-    "
+"
         secret-tool store --label "Sentry Auth Token" xdg:schema "${SENTRY_KEY_ID}"
         WTF_SENTRY_TOKEN="$(secret_lookup "${SENTRY_KEY_ID}")"
     fi
@@ -55,10 +56,25 @@ It needs read-only permissions. Paste it here:
     export WTF_SENTRY_TOKEN
 }
 
+setup:freshdesk() {
+    if ! WTF_FRESHDESK_TOKEN="$(secret_lookup "${FRESHDESK_KEY_ID}")"; then
+        echo "
+Find your Freshdesk API token in your user profile settings.
+
+Paste it here:
+"
+        secret-tool store --label "Freshdesk API Key" xdg:schema "${FRESHDESK_KEY_ID}"
+        WTF_FRESHDESK_TOKEN="$(secret_lookup "${FRESHDESK_KEY_ID}")"
+    fi
+
+    export WTF_FRESHDESK_TOKEN
+}
+
 main() {
     setup:jira
     setup:github
     setup:sentry
+    setup:freshdesk
     wtfutil --config="${THIS_DIR}/config.yml"
 }
 
