@@ -8,7 +8,8 @@ def main [] {
     {
       query: "is:unresolved assigned_or_suggested:[me,my_teams]"
       statsPeriod: "30d"
-      environment: [prod production]
+      environment: [prod production production_release]
+      project: -1
     } | url build-query
   )
 

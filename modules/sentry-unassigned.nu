@@ -8,7 +8,8 @@ def main [] {
     {
       query: "is:unresolved is:unassigned"
       statsPeriod: "30d"
-      environment: [prod production]
+      environment: [prod production production_release]
+      project: -1
     } | url build-query
   )
 
