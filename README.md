@@ -15,7 +15,6 @@ Besides [wtfutil](https://wtfutil.com/installation/), you need:
 * GitHub CLI with:
   * [my fork of the gh-alerts plugin](https://github.com/pcrock-thmdo/gh-alerts/)
   * `jq`
-  * [gh-notify plugin](https://github.com/pcrockett/gh-notify)
 
 ## Getting Started
 

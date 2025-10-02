@@ -80,7 +80,7 @@ wtf:
     github_notifications:
       type: cmdrunner
       title: GitHub Notifications
-      cmd: "modules/github-notifications.sh"
+      cmd: "modules/github-notifications.nu"
       enabled: true
       position:
         top: 1
