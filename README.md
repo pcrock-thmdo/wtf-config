@@ -30,7 +30,9 @@ your terminal.
 
 ## Ideas for future work
 
+* [ ] [Replace broken Jira module](https://developer.atlassian.com/cloud/jira/platform/rest/v2/api-group-issues/#api-group-issues)
+  with my own implementation
 * [ ] [Slack module](https://api.slack.com/methods/search.messages)
 * [ ] [Calendar module](https://wtfutil.com/modules/google/gcal/)
 * [ ] [Gmail module](https://developers.google.com/gmail/api/guides/filtering)
-* [ ] [Freshdesk module](https://developers.freshdesk.com/api/#list_all_tickets)
+* [x] [Freshdesk module](https://developers.freshdesk.com/api/#list_all_tickets)
