@@ -64,19 +64,16 @@ wtf:
 ## SECOND ROW ##
     jira_td:
       # apiKey: "Use WTF_JIRA_API_KEY env variable instead"
-      type: jira
-      title: JIRA (TD)
-      domain: "https://thermondo.atlassian.net"
-      email: "philip.crockett@thermondo.de"
+      type: cmdrunner
+      title: "Jira (In Progress)"
+      cmd: "modules/jira.nu"
       enabled: true
-      jql: "project = TD AND assignee in (currentUser()) AND status = 'In Progress' ORDER BY updated DESC"
       position:
         top: 1
         left: 0
         height: 1
         width: 2
       refreshInterval: 15m
-      verifyServerCertificate: true
     github_notifications:
       type: cmdrunner
       title: GitHub Notifications
