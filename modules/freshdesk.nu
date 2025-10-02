@@ -41,7 +41,7 @@ def main [] {
       {
         updated_at: ($in.updated_at | into datetime)
         priority: ($in.priority | into priority)
-        subject: ($in.subject | str truncate 60)
+        subject: ($in.subject | str truncate 80)
       }
     }
     | sort-by updated_at --reverse
