@@ -1,5 +1,6 @@
 #!/usr/bin/env nu
-use ./util/wtf-table.nu
+use util/wtf-table.nu
+use util/str.nu
 
 const IGNORED_SEVERITIES = [LOW]
 const SEVERITY_SORT = {
@@ -17,10 +18,10 @@ def main [] {
   }
   | each {
     {
-      repo: $in.repository.nameWithOwner
+      repo: ($in.repository.nameWithOwner | str replace --regex "^thermondo/" "" | str truncate 25)
       package: $in.securityVulnerability.package.name
       severity: $in.securityVulnerability.severity
-      summary: $in.securityAdvisory.summary
+      summary: ($in.securityAdvisory.summary | str truncate 55)
     }
   }
   | sort-alerts

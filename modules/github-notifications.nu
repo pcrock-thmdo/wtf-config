@@ -1,6 +1,7 @@
 #!/usr/bin/env nu
 
 use util/wtf-table.nu
+use util/str.nu
 
 def main [] {
   # <https://docs.github.com/en/rest/activity/notifications>
@@ -15,9 +16,9 @@ def main [] {
   $notifications
     | each {|notif|
       {
-        title: $notif.subject.title
+        title: ($notif.subject.title | str truncate 35)
         updated_at: ($notif.updated_at | into datetime)
-        repo: $notif.repository.name
+        repo: ($notif.repository.name | str truncate 35)
         reason: $notif.reason
       }
     }
