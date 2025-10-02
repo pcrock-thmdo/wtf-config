@@ -13,7 +13,6 @@ export def put [$endpoint: string] {
 # assign one or more issues to a team
 export def "assign team" [$team_id: int] {
   $in | each {|issue_id|
-    print $"assigning issue ($issue_id) to team ($team_id)..."
     { assignedTo: $"team:($team_id)" } | put $"organizations/($ORG)/issues/($issue_id)/"
   }
 }
