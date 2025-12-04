@@ -9,12 +9,18 @@ const SEVERITY_SORT = {
   MODERATE: 2
   LOW: 3
 }
+const IGNORED_ALERTS = [
+  "https://github.com/advisories/GHSA-5j98-mcp5-4vw2"  # glob: waiting for jest update
+]
 
 def main [] {
   gh alerts --org thermondo --json
   | from json
   | where {|alert|
     not ($IGNORED_SEVERITIES | any { $in == $alert.securityVulnerability.severity })
+  }
+  | where {|alert|
+    not ($IGNORED_ALERTS | any { $in == $alert.securityAdvisory.permalink })
   }
   | each {
     {
