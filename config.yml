@@ -39,15 +39,17 @@ wtf:
         height: 1
         width: 1
       refreshInterval: 150
-    power:
+    taskwarrior_active:
       enabled: true
+      type: cmdrunner
+      title: Active Tasks
+      cmd: "modules/taskwarrior-active.nu"
       position:
         top: 0
         left: 0
         height: 1
         width: 1
-      refreshInterval: 15
-      title: "⚡️"
+      refreshInterval: 2m
     heroku_status:
       type: cmdrunner
       title: Heroku Status
