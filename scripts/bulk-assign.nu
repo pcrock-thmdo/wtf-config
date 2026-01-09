@@ -2,18 +2,15 @@
 
 use ../modules/util/sentry.nu
 
-const projects = {
-  CRAFTSPEOPLE_APP: 4507335033815040
-  CRAFTSPEOPLE_SERVICE: 4507498856710144
-}
-
 const teams = {
   INSTALL_FIX_MAINTAIN: 1855812
+  PLATFORM: 1218304
 }
 
 def main [] {
   assign-craftspeople-service-consecutive-http
   assign-craftspeople-app-n-plus-one
+  assign-backend-memory-exceeded
   ignore
 }
 
@@ -25,7 +22,7 @@ def assign-craftspeople-service-consecutive-http [] {
       query: "is:unresolved is:unassigned issue.type:performance_consecutive_http"
       statsPeriod: "30d"
       environment: [prod production production_release]
-      project: $projects.CRAFTSPEOPLE_SERVICE
+      project: $sentry.projects.CRAFTSPEOPLE_SERVICE
     } | url build-query
   )
 
@@ -40,11 +37,26 @@ def assign-craftspeople-app-n-plus-one [] {
       query: "is:unresolved is:unassigned issue.type:performance_n_plus_one_db_queries"
       statsPeriod: "30d"
       environment: [prod production production_release]
-      project: $projects.CRAFTSPEOPLE_APP
+      project: $sentry.projects.CRAFTSPEOPLE_APP
     } | url build-query
   )
 
   let issues = sentry get $"organizations/($sentry.ORG)/issues/?($query_str)"
   $"assigning ($issues | length) N+1 issues to IFM..." | print
   $issues | each { $in.id } | sentry assign team $teams.INSTALL_FIX_MAINTAIN
+}
+
+def assign-backend-memory-exceeded [] {
+  let query_str = (
+    {
+      query: 'is:unresolved is:unassigned "Memory quota exceeded (R14)"'
+      statsPeriod: "7d"
+      environment: [production]
+      project: $sentry.projects.BACKEND
+    } | url build-query
+  )
+
+  let issues = sentry get $"organizations/($sentry.ORG)/issues/?($query_str)"
+  $"assigning ($issues | length) memory quota exceeded issues to platform..." | print
+  $issues | each { $in.id } | sentry assign team $teams.PLATFORM
 }

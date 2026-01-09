@@ -2,10 +2,6 @@
 
 use ../modules/util/sentry.nu
 
-const projects = {
-  BACKEND: 12187
-}
-
 def main [] {
   resolve-timeouts
   ignore
@@ -14,10 +10,10 @@ def main [] {
 def resolve-timeouts [] {
   let issues = (
     {
-      query: "is:unresolved is:unassigned \"request timeout on /\""
+      query: 'is:unresolved is:unassigned "request timeout on /"'
       statsPeriod: "7d"
       environment: [production]
-      project: $projects.BACKEND
+      project: $sentry.projects.BACKEND
     }
     | sentry issues
   )
