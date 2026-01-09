@@ -28,7 +28,7 @@ def assign-craftspeople-service-consecutive-http [] {
 
   let issues = sentry get $"organizations/($sentry.ORG)/issues/?($query_str)"
   $"assigning ($issues | length) consecutive HTTP issues to IFM..." | print
-  $issues | each { $in.id } | sentry assign team $teams.INSTALL_FIX_MAINTAIN
+  $issues | sentry assign team $teams.INSTALL_FIX_MAINTAIN
 }
 
 def assign-craftspeople-app-n-plus-one [] {
@@ -43,7 +43,7 @@ def assign-craftspeople-app-n-plus-one [] {
 
   let issues = sentry get $"organizations/($sentry.ORG)/issues/?($query_str)"
   $"assigning ($issues | length) N+1 issues to IFM..." | print
-  $issues | each { $in.id } | sentry assign team $teams.INSTALL_FIX_MAINTAIN
+  $issues | sentry assign team $teams.INSTALL_FIX_MAINTAIN
 }
 
 def assign-backend-memory-exceeded [] {
@@ -58,5 +58,5 @@ def assign-backend-memory-exceeded [] {
 
   let issues = sentry get $"organizations/($sentry.ORG)/issues/?($query_str)"
   $"assigning ($issues | length) memory quota exceeded issues to platform..." | print
-  $issues | each { $in.id } | sentry assign team $teams.PLATFORM
+  $issues | sentry assign team $teams.PLATFORM
 }
