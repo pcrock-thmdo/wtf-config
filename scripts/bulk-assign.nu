@@ -1,7 +1,6 @@
 #!/usr/bin/env nu
 
 use ../modules/util/sentry.nu
-use ../modules/util/wtf-table.nu
 
 const projects = {
   CRAFTSPEOPLE_APP: 4507335033815040

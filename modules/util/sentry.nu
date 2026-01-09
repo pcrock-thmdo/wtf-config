@@ -2,22 +2,35 @@ export const ORG = "thermondo"
 const SENTRY_KEY_ID = "com.philcrockett.wtfutil.sentry"
 const SENTRY_BASE_URL = $"https://sentry.io/api/0"
 
-export def get [$endpoint: string] {
+export def get [$endpoint: string]: nothing -> any {
   sentry-api-call get $endpoint
 }
 
-export def put [$endpoint: string] {
-  $in | sentry-api-call put $endpoint
+export def put [$endpoint: string]: record -> record {
+  sentry-api-call put $endpoint
+}
+
+# get a list of issues. expects search parameters as record input.
+export def issues []: record -> list<record> {
+  let query_str = $in | url build-query
+  sentry-api-call get $"organizations/($ORG)/issues/?($query_str)"
 }
 
 # assign one or more issues to a team
-export def "assign team" [$team_id: int] {
-  $in | each {|issue_id|
+export def "assign team" [$team_id: int]: list<string> -> list<record> {
+  each {|issue_id|
     { assignedTo: $"team:($team_id)" } | put $"organizations/($ORG)/issues/($issue_id)/"
   }
 }
 
-def get-sentry-key [] {
+# resolve one or more issues
+export def resolve []: list<record> -> list<record> {
+  each {|issue|
+    { status: resolved } | put $"organizations/($ORG)/issues/($issue.id)/"
+  }
+}
+
+def get-sentry-key []: nothing -> string {
   ^secret-tool lookup xdg:schema $SENTRY_KEY_ID
 }
 
