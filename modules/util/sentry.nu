@@ -22,14 +22,14 @@ export def issues []: record<query: string, statsPeriod: string, environment: li
 }
 
 # assign one or more issues to a team
-export def "assign team" [$team_id: int]: list<record<id: int>> -> list<record> {
+export def "assign team" [$team_id: int]: list<record<id: string>> -> list<record> {
   each {|issue|
     { assignedTo: $"team:($team_id)" } | put $"organizations/($ORG)/issues/($issue.id)/"
   }
 }
 
 # resolve one or more issues
-export def resolve []: list<record<id: int>> -> list<record> {
+export def resolve []: list<record<id: string>> -> list<record> {
   each {|issue|
     { status: resolved } | put $"organizations/($ORG)/issues/($issue.id)/"
   }
