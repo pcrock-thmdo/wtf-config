@@ -17,6 +17,7 @@ def main [
   --obvious-only:  # only assign blindingly obvious issues with no edge cases
 ] {
   assign-consecutive-http CRAFTSPEOPLE_SERVICE INSTALL_FIX_MAINTAIN
+  assign-consecutive-http CRAFTSPEOPLE_APP INSTALL_FIX_MAINTAIN
   assign-n-plus-one CRAFTSPEOPLE_APP INSTALL_FIX_MAINTAIN
   assign-n-plus-one FULFILLMENT FULFILLMENT
 
