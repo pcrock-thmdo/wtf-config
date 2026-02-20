@@ -9,9 +9,7 @@ const SEVERITY_SORT = {
   MODERATE: 2
   LOW: 3
 }
-const IGNORED_ALERTS = [
-  "https://github.com/advisories/GHSA-5j98-mcp5-4vw2"  # glob: waiting for jest update
-]
+const IGNORED_ALERTS = []
 
 def main [] {
   gh alerts --org thermondo --json
@@ -25,7 +23,7 @@ def main [] {
   | each {
     {
       repo: ($in.repository.nameWithOwner | str replace --regex "^thermondo/" "" | str truncate 25)
-      package: $in.securityVulnerability.package.name
+      package: ($in.securityVulnerability.package.name | str truncate 25)
       severity: $in.securityVulnerability.severity
       summary: ($in.securityAdvisory.summary | str truncate 55)
     }
